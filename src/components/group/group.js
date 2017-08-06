@@ -49,6 +49,7 @@ class Group extends Component {
           Extra payment: <input type="number" value={this.state.extra} onChange={this.updateExtra}/>
         </div>
         <div className="outputs">
+          <br />Base payment: {results.basePayment}
           <br />Payment increased by: {results.additionalPrinciple}, or: {results.additionalPrinciplePercent}%
           <br />Interest reduced by: {results.interestReducedBy}, or: {results.interestReducedByPercent}%
           <br />Term reduced by: {results.termReducedBy} months, or: {results.termReducedByPercent}%

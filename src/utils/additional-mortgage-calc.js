@@ -47,9 +47,10 @@ export const getValues = (principle, monthlyRate, term, additionalPrinciple) => 
       originalTotalInterest += p.interest;
     });
   }
-  const basePayment = calculateBasePayment(principle, monthlyRate, term);
+  const basePayment = round(calculateBasePayment(principle, monthlyRate, term));
 
   return {
+    basePayment: basePayment,
     additionalPrinciple: additionalPrinciple,
     additionalPrinciplePercent: round(additionalPrinciple/basePayment*100),
     interestReducedBy: round(originalTotalInterest - totalInterest),
@@ -60,6 +61,6 @@ export const getValues = (principle, monthlyRate, term, additionalPrinciple) => 
     totalPrinciple: round(totalPrinciple),
     total: round(totalPrinciple + totalInterest),
     paymentMonthCount: payments.length,
-    paymentYearCount: payments.length / 12
+    paymentYearCount: round(payments.length / 12)
   };
 };
