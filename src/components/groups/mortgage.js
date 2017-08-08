@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 
 import { getValues } from '../../utils/additional-mortgage-calc';
-import './group.css';
 
-class Group extends Component {
+class Mortgage extends Component {
   constructor(props) {
     super(props);
 
@@ -56,7 +55,7 @@ class Group extends Component {
           <br />Total interest paid: {results.totalInterest}
           <br />Total principle paid: {results.totalPrinciple}
           <br />Total paid: {results.total}
-          <br />Number of payments: {results.paymentMonthCount} over {results.paymentYearCount} years
+          <br />Number of payments: {results.paymentMonthCount}, over {results.paymentYearCount} years
           <br />
         </div>
       </div>
@@ -64,5 +63,4 @@ class Group extends Component {
   }
 }
 
-
-export default Group;
+export default Mortgage;

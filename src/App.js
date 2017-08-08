@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Group from './components/group/group';
+import Group from './components/groups/groups';
 import logo from './logo.svg';
 import './App.css';
 
