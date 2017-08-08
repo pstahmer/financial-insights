@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 
 import Mortgage from './mortgage';
+import Apr from './apr';
 import './groups.css';
 
 const GROUP_NAMES = {
-  MORTGAGE: 'mortgage'
+  MORTGAGE: 'mortgage',
+  APR: 'apr'
 };
 
 const GROUP_NAMES_ARRAY = [
-  GROUP_NAMES.MORTGAGE
+  GROUP_NAMES.MORTGAGE,
+  GROUP_NAMES.APR
 ];
 
 class Groups extends Component {
@@ -30,14 +33,14 @@ class Groups extends Component {
     switch (groupName) {
       case GROUP_NAMES.MORTGAGE:
         return (<Mortgage key={i} onClose={this.removeGroup} />);
+      case GROUP_NAMES.APR:
+        return (<Apr key={i} onClose={this.removeGroup} />);
       default:
         return null;
     }
   }
 
   removeGroup(groupName) {
-    console.log(this.state.groups, groupName);
-    console.log(this.state.groups.filter(g => g !== groupName));
     this.setState({groups: this.state.groups.filter(g => g !== groupName)});
   }
 
