@@ -18,6 +18,7 @@ class Groups extends Component {
     this.state = { groups: [] };
     this.addGroup = this.addGroup.bind(this);
     this.getGroup = this.getGroup.bind(this);
+    this.removeGroup = this.removeGroup.bind(this);
   }
 
   addGroup(event) {
@@ -28,10 +29,16 @@ class Groups extends Component {
   getGroup(groupName, i) {
     switch (groupName) {
       case GROUP_NAMES.MORTGAGE:
-        return (<Mortgage key={i} />);
+        return (<Mortgage key={i} onClose={this.removeGroup} />);
       default:
         return null;
     }
+  }
+
+  removeGroup(groupName) {
+    console.log(this.state.groups, groupName);
+    console.log(this.state.groups.filter(g => g !== groupName));
+    this.setState({groups: this.state.groups.filter(g => g !== groupName)});
   }
 
   renderOption(n, i) {

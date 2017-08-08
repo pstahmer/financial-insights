@@ -39,8 +39,11 @@ class Mortgage extends Component {
 
   render() {
     const results = this.calculateResult();
+    const closeGroup = this.props.onClose.bind(null, 'mortgage');
+
     return (
       <div className="group">
+        <div className="close" onClick={closeGroup}>Close</div>
         <div className="inputs">
           Principle: <input type="number" value={this.state.principle} onChange={this.updatePrinciple}/>
           Interest: <input type="number" value={this.state.interest} onChange={this.updateInterest}/>
