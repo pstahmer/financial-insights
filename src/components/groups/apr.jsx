@@ -43,27 +43,32 @@ class Apr extends Group {
     return {};
   }
 
-  render() {
+  closeGroup() {
+    this.props.onClose('apr');
+  }
+
+  renderFields() {
+    return (
+      <div className="inputs">
+        Principle: <input type="number" value={this.state.principle} onChange={this.updatePrinciple}/>
+        APR: <input type="number" value={this.state.interest} onChange={this.updateInterest}/>
+        Compounds/year (annual: 1, monthly: 12, etc ): <input type="number" value={this.state.compounds} onChange={this.updateCompounds}/>
+        Term (in years): <input type="number" value={this.state.term} onChange={this.updateTerm}/>
+        Payment (monthly): <input type="number" value={this.state.payment} onChange={this.updatePayment}/>
+      </div>
+    );
+  }
+
+  renderResults() {
     const results = this.calculateResult();
-    const closeGroup = this.props.onClose.bind(null, 'apr');
 
     return (
-      <div className="group">
-        <div className="close" onClick={closeGroup}>X</div>
-        <div className="inputs">
-          Principle: <input type="number" value={this.state.principle} onChange={this.updatePrinciple}/>
-          APR: <input type="number" value={this.state.interest} onChange={this.updateInterest}/>
-          Compounds/year (annual: 1, monthly: 12, etc ): <input type="number" value={this.state.compounds} onChange={this.updateCompounds}/>
-          Term (in years): <input type="number" value={this.state.term} onChange={this.updateTerm}/>
-          Payment (monthly): <input type="number" value={this.state.payment} onChange={this.updatePayment}/>
-        </div>
-        <div className="outputs">
-          <br />Total paid: {results.totalPaid}
-          <br />Principle paid: {results.principlePaid}, or: {results.principlePaidPercent}% of total payment
-          <br />Interest paid: {results.interestPaid}, or: {results.interestPaidPercent}% of total payment
-          <br />Remaining Principle: {results.remainingPrinciple}, or: {results.remainingPrinciplePercent}%
-          <br />
-        </div>
+      <div className="outputs">
+        <br />Total paid: {results.totalPaid}
+        <br />Principle paid: {results.principlePaid}, or: {results.principlePaidPercent}% of total payment
+        <br />Interest paid: {results.interestPaid}, or: {results.interestPaidPercent}% of total payment
+        <br />Remaining Principle: {results.remainingPrinciple}, or: {results.remainingPrinciplePercent}%
+        <br />
       </div>
     );
   }

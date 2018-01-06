@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 
 // base class for the other groups to inherit
 class Group extends Component {
@@ -27,6 +27,16 @@ class Group extends Component {
 
   formatPercent(value) {
     return `${value}%`;
+  }
+
+  render() {
+    return (
+      <div className="group">
+        <span className="close" onClick={this.closeGroup}>X</span>
+        {this.renderFields()}
+        {this.renderResults()}
+      </div>
+    );
   }
 }
 

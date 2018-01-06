@@ -38,30 +38,35 @@ class Mortgage extends Group {
     return {};
   }
 
-  render() {
+  closeGroup() {
+    this.props.onClose('mortgage');
+  }
+
+  renderFields() {
+    return (
+      <div className="inputs">
+        Principle: <input type="number" value={this.state.principle} onChange={this.updatePrinciple}/>
+        Interest: <input type="number" value={this.state.interest} onChange={this.updateInterest}/>
+        Term (in months): <input type="number" value={this.state.term} onChange={this.updateTerm}/>
+        Extra payment: <input type="number" value={this.state.extra} onChange={this.updateExtra}/>
+      </div>
+    );
+  }
+
+  renderResults() {
     const results = this.calculateResult();
-    const closeGroup = this.props.onClose.bind(null, 'mortgage');
 
     return (
-      <div className="group">
-        <span className="close" onClick={closeGroup}>X</span>
-        <div className="inputs">
-          Principle: <input type="number" value={this.state.principle} onChange={this.updatePrinciple}/>
-          Interest: <input type="number" value={this.state.interest} onChange={this.updateInterest}/>
-          Term (in months): <input type="number" value={this.state.term} onChange={this.updateTerm}/>
-          Extra payment: <input type="number" value={this.state.extra} onChange={this.updateExtra}/>
-        </div>
-        <div className="outputs">
-          <br />Base payment: {this.formatCurrency(results.basePayment)}
-          <br />Payment increased by: {this.formatCurrency(results.additionalPrinciple)}, or: {this.formatPercent(results.additionalPrinciplePercent)}
-          <br />Interest reduced by: {this.formatCurrency(results.interestReducedBy)}, or: {this.formatPercent(results.interestReducedByPercent)}
-          <br />Term reduced by: {results.termReducedBy} months, or: {this.formatPercent(results.termReducedByPercent)}
-          <br />Total interest paid: {this.formatCurrency(results.totalInterest)}
-          <br />Total principle paid: {this.formatCurrency(results.totalPrinciple)}
-          <br />Total paid: {this.formatCurrency(results.total)}
-          <br />Number of payments: {results.paymentMonthCount}, over {results.paymentYearCount} years
-          <br />
-        </div>
+      <div className="outputs">
+        <br />Base payment: {this.formatCurrency(results.basePayment)}
+        <br />Payment increased by: {this.formatCurrency(results.additionalPrinciple)}, or: {this.formatPercent(results.additionalPrinciplePercent)}
+        <br />Interest reduced by: {this.formatCurrency(results.interestReducedBy)}, or: {this.formatPercent(results.interestReducedByPercent)}
+        <br />Term reduced by: {results.termReducedBy} months, or: {this.formatPercent(results.termReducedByPercent)}
+        <br />Total interest paid: {this.formatCurrency(results.totalInterest)}
+        <br />Total principle paid: {this.formatCurrency(results.totalPrinciple)}
+        <br />Total paid: {this.formatCurrency(results.total)}
+        <br />Number of payments: {results.paymentMonthCount}, over {results.paymentYearCount} years
+        <br />
       </div>
     );
   }
