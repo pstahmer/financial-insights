@@ -64,10 +64,10 @@ class Apr extends Group {
 
     return (
       <div className="outputs">
-        <br />Total paid: {results.totalPaid}
-        <br />Principle paid: {results.principlePaid}, or: {results.principlePaidPercent}% of total payment
-        <br />Interest paid: {results.interestPaid}, or: {results.interestPaidPercent}% of total payment
-        <br />Remaining Principle: {results.remainingPrinciple}, or: {results.remainingPrinciplePercent}%
+        <br />Total paid: {this.formatCurrency(results.totalPaid)}
+        <br />Principle paid: {this.formatCurrency(results.principlePaid)}, or: {this.formatPercent(results.principlePaidPercent)} of total payment
+        <br />Interest paid: {this.formatCurrency(results.interestPaid)}, or: {this.formatPercent(results.interestPaidPercent)} of total payment
+        <br />Remaining Principle: {this.formatCurrency(results.remainingPrinciple)}, or: {this.formatPercent(results.remainingPrinciplePercent)}
         <br />
       </div>
     );
