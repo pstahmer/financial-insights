@@ -1,8 +1,10 @@
+@import "../../common/colors.scss";
+
 .add-loan-card {
   cursor: pointer;
   margin: 0 5px;
   padding: 10px;
-  background-color: #990099;
-  color: #009900;
+  background-color: $sky-blue;
+  color: $navy-blue;
   display: inline-block;
 }

@@ -1,14 +1,14 @@
 .group {
   margin: 10px;
   padding: 10px;
-  background-color: #AAAACC; }
+  background-color: #bbccee; }
 
 .close {
   cursor: pointer;
   float: right;
   padding: 10px 14px;
   background-color: #444455;
-  color: #AAAABB; }
+  color: #AAAACC; }
 
 .selector {
   margin: 10px 5px; }

@@ -1,15 +1,17 @@
+@import "../../common/colors.scss";
+
 .group {
   margin: 10px;
   padding: 10px;
-  background-color: #AAAACC;
+  background-color: $muted-periwinkle;
 }
 
 .close {
   cursor: pointer;
   float: right;
   padding: 10px 14px;
-  background-color: #444455;
-  color: #AAAABB;
+  background-color: $white;
+  color: $dusty-lavendar;
 }
 
 .selector {
