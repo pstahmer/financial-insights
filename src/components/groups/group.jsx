@@ -27,9 +27,11 @@ class Group extends Component {
   }
 
   render() {
+    const closeGroup = this.closeGroup.bind(this);
+
     return (
       <div className="group">
-        <span className="close" onClick={this.closeGroup}>X</span>
+        <span className="close" onClick={closeGroup}>X</span>
         {this.renderFields()}
         {this.renderResults()}
       </div>

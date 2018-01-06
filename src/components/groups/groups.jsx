@@ -41,6 +41,8 @@ class Groups extends Component {
   }
 
   removeGroup(groupName) {
+    // TODO: If you have duplicates this will remove them.
+    // correct when extracting to reducer
     this.setState({groups: this.state.groups.filter(g => g !== groupName)});
   }
 
