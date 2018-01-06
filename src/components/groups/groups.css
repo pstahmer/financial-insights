@@ -1,5 +1,19 @@
 .group {
   margin: 10px;
+  padding: 10px;
+  background-color: #AAAACC;
+}
+
+.close {
+  cursor: pointer;
+  float: right;
+  padding: 10px 14px;
+  background-color: #444455;
+  color: #AAAABB;
+}
+
+.selector {
+  margin: 10px;
 }
 
 input {

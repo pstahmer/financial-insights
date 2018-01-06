@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
+import Group from './group';
 import { getValues } from '../../utils/additional-mortgage-calc';
 
-class Mortgage extends Component {
+class Mortgage extends Group {
   constructor(props) {
     super(props);
 
@@ -43,7 +44,7 @@ class Mortgage extends Component {
 
     return (
       <div className="group">
-        <div className="close" onClick={closeGroup}>Close</div>
+        <span className="close" onClick={closeGroup}>X</span>
         <div className="inputs">
           Principle: <input type="number" value={this.state.principle} onChange={this.updatePrinciple}/>
           Interest: <input type="number" value={this.state.interest} onChange={this.updateInterest}/>
@@ -51,13 +52,13 @@ class Mortgage extends Component {
           Extra payment: <input type="number" value={this.state.extra} onChange={this.updateExtra}/>
         </div>
         <div className="outputs">
-          <br />Base payment: {results.basePayment}
-          <br />Payment increased by: {results.additionalPrinciple}, or: {results.additionalPrinciplePercent}%
-          <br />Interest reduced by: {results.interestReducedBy}, or: {results.interestReducedByPercent}%
-          <br />Term reduced by: {results.termReducedBy} months, or: {results.termReducedByPercent}%
-          <br />Total interest paid: {results.totalInterest}
-          <br />Total principle paid: {results.totalPrinciple}
-          <br />Total paid: {results.total}
+          <br />Base payment: {this.formatCurrency(results.basePayment)}
+          <br />Payment increased by: {this.formatCurrency(results.additionalPrinciple)}, or: {this.formatPercent(results.additionalPrinciplePercent)}
+          <br />Interest reduced by: {this.formatCurrency(results.interestReducedBy)}, or: {this.formatPercent(results.interestReducedByPercent)}
+          <br />Term reduced by: {results.termReducedBy} months, or: {this.formatPercent(results.termReducedByPercent)}
+          <br />Total interest paid: {this.formatCurrency(results.totalInterest)}
+          <br />Total principle paid: {this.formatCurrency(results.totalPrinciple)}
+          <br />Total paid: {this.formatCurrency(results.total)}
           <br />Number of payments: {results.paymentMonthCount}, over {results.paymentYearCount} years
           <br />
         </div>

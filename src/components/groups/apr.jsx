@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import { calculateApr, calculateApy } from '../../utils/apr';
+import { calculateApr } from '../../utils/apr';
+import Group from './group';
 
-class Apr extends Component {
+class Apr extends Group {
   constructor(props) {
     super(props);
 
@@ -48,7 +49,7 @@ class Apr extends Component {
 
     return (
       <div className="group">
-        <div className="close" onClick={closeGroup}>Close</div>
+        <div className="close" onClick={closeGroup}>X</div>
         <div className="inputs">
           Principle: <input type="number" value={this.state.principle} onChange={this.updatePrinciple}/>
           APR: <input type="number" value={this.state.interest} onChange={this.updateInterest}/>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Group from './components/groups/groups';
+import Groups from './components/groups/groups';
 import logo from './logo.svg';
 import './App.css';
 
@@ -11,7 +11,7 @@ class App extends Component {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </div>
-        <Group />
+        <Groups />
       </div>
     );
   }

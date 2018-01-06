@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Mortgage from './mortgage';
 import Apr from './apr';
+import AddLoanCard from '../cards/add-loan-card';
 import './groups.css';
 
 const GROUP_NAMES = {
@@ -24,9 +25,8 @@ class Groups extends Component {
     this.removeGroup = this.removeGroup.bind(this);
   }
 
-  addGroup(event) {
-    this.setState({groups: this.state.groups.concat(event.target.value)});
-    this.refs.select.value = null;
+  addGroup(name) {
+    this.setState({groups: this.state.groups.concat(name)});
   }
 
   getGroup(groupName, i) {
@@ -51,14 +51,12 @@ class Groups extends Component {
   render() {
     return (
       <div className="groups-container">
+        <div className="selector">
+          {GROUP_NAMES_ARRAY.map((n, i) =>
+            <AddLoanCard key={i} text={n} click={this.addGroup.bind(null, n)} />)}
+        </div>
         <div className="groups">
           {this.state.groups.map(this.getGroup)}
-        </div>
-        <div className="selector">
-          <select ref="select" onChange={this.addGroup}>
-            <option value="null">Select a type of loan</option>
-            {GROUP_NAMES_ARRAY.map(this.renderOption)}
-          </select>
         </div>
       </div>
     );
