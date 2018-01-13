@@ -2,6 +2,17 @@ import React, { Component } from 'react';
 
 // base class for the other groups to inherit
 class Group extends Component {
+  fields = [];
+
+  addField(title, stateProp, onChange, step) {
+    this.fields.push({
+      title,
+      getValue: () => this.state[stateProp],
+      onChange,
+      step
+    });
+  }
+
   formatCurrency(val) {
     const value = val.toString();
     if (value.length <= 2) {
@@ -24,6 +35,19 @@ class Group extends Component {
 
   formatPercent(value) {
     return `${value}%`;
+  }
+
+  renderFields() {
+    return (
+      <table>
+        {this.fields.map((f, i) => (
+          <tr key={i}>
+            <td>{f.title}:</td>
+            <td><input value={f.getValue()} onChange={f.onChange} type="number" step={f.step || 1}/></td>
+          </tr>
+        ))}
+      </table>
+    );
   }
 
   render() {

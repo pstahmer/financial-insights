@@ -12,10 +12,15 @@ class Mortgage extends Group {
     this.updateInterest = this.updateInterest.bind(this);
     this.updateTerm = this.updateTerm.bind(this);
     this.updateExtra = this.updateExtra.bind(this);
+
+    this.addField('Principle', 'principle', this.updatePrinciple, 1000);
+    this.addField('Interest', 'interest', this.updateInterest, .01);
+    this.addField('Term (in months)', 'term', this.updateTerm, 1);
+    this.addField('Extra payment', 'extra', this.updateExtra, 10);
   }
 
   updatePrinciple(event) {
-    this.setState({principle: parseInt(event.target.value, 10)});
+    this.setState({ principle: parseInt(event.target.value, 10) });
   }
 
   updateInterest(event) {
@@ -40,17 +45,6 @@ class Mortgage extends Group {
 
   closeGroup() {
     this.props.onClose('mortgage');
-  }
-
-  renderFields() {
-    return (
-      <div className="inputs">
-        Principle: <input type="number" value={this.state.principle} onChange={this.updatePrinciple}/>
-        Interest: <input type="number" value={this.state.interest} onChange={this.updateInterest}/>
-        Term (in months): <input type="number" value={this.state.term} onChange={this.updateTerm}/>
-        Extra payment: <input type="number" value={this.state.extra} onChange={this.updateExtra}/>
-      </div>
-    );
   }
 
   renderResults() {

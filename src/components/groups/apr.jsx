@@ -10,9 +10,16 @@ class Apr extends Group {
     this.state = { principle: 2000, interest: 0.15, compound: 12, term: 12, payment: 100 };
     this.updatePrinciple = this.updatePrinciple.bind(this);
     this.updateInterest = this.updateInterest.bind(this);
+    this.updateCompound = this.updateCompound.bind(this);
     this.updateTerm = this.updateTerm.bind(this);
     this.updatePayment = this.updatePayment.bind(this);
-    this.updateCompound = this.updateCompound.bind(this);
+
+    this.addField('Principle', 'principle', this.updatePrinciple, 100);
+    this.addField('APR', 'interest', this.updateInterest, .01);
+    this.addField('Term (in years)', 'term', this.updateTerm, 1);
+    this.addField('Payment (monthly)', 'payment', this.updatePayment, 10);
+    // TODO: Make a m/y/d dropdown
+    this.addField('Compounds/year (annual: 1, monthly: 12, etc )', 'compound', this.updateCompound, 1);
   }
 
   updatePrinciple(event) {
@@ -45,18 +52,6 @@ class Apr extends Group {
 
   closeGroup() {
     this.props.onClose('apr');
-  }
-
-  renderFields() {
-    return (
-      <div className="inputs">
-        Principle: <input type="number" value={this.state.principle} onChange={this.updatePrinciple}/>
-        APR: <input type="number" value={this.state.interest} onChange={this.updateInterest}/>
-        Compounds/year (annual: 1, monthly: 12, etc ): <input type="number" value={this.state.compounds} onChange={this.updateCompounds}/>
-        Term (in years): <input type="number" value={this.state.term} onChange={this.updateTerm}/>
-        Payment (monthly): <input type="number" value={this.state.payment} onChange={this.updatePayment}/>
-      </div>
-    );
   }
 
   renderResults() {
