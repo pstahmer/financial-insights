@@ -40,12 +40,14 @@ class Group extends Component {
   renderFields() {
     return (
       <table>
+        <tbody>
         {this.fields.map((f, i) => (
           <tr key={i}>
             <td>{f.title}:</td>
             <td><input value={f.getValue()} onChange={f.onChange} type="number" step={f.step || 1}/></td>
           </tr>
         ))}
+        </tbody>
       </table>
     );
   }

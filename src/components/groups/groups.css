@@ -1,7 +1,21 @@
+.groups {
+  display: flex;
+  flex-wrap: wrap; }
+
 .group {
   margin: 10px;
   padding: 10px;
-  background-color: #bbccee; }
+  background-color: #bbccee;
+  width: 450px;
+  display: inline-block; }
+  .group table th {
+    font-weight: normal;
+    text-align: center; }
+  .group table td {
+    text-align: right;
+    padding: 0 4px; }
+    .group table td:nth-child(3) {
+      text-align: left; }
 
 .close {
   cursor: pointer;

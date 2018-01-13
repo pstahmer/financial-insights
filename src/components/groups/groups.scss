@@ -1,9 +1,30 @@
 @import "../../common/colors.scss";
 
+.groups {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .group {
   margin: 10px;
   padding: 10px;
   background-color: $muted-periwinkle;
+  width: 450px;
+  display: inline-block;
+
+  table {
+    th {
+      font-weight: normal;
+      text-align: center;
+    }
+    td {
+      text-align: right;
+      padding: 0 4px;
+      &:nth-child(3) {
+        text-align: left;
+      }
+    }
+  }
 }
 
 .close {

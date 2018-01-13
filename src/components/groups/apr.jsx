@@ -19,7 +19,7 @@ class Apr extends Group {
     this.addField('Term (in years)', 'term', this.updateTerm, 1);
     this.addField('Payment (monthly)', 'payment', this.updatePayment, 10);
     // TODO: Make a m/y/d dropdown
-    this.addField('Compounds/year (annual: 1, monthly: 12, etc )', 'compound', this.updateCompound, 1);
+    this.addField('Compounds/year', 'compound', this.updateCompound, 1);
   }
 
   updatePrinciple(event) {
@@ -58,12 +58,16 @@ class Apr extends Group {
     const results = this.calculateResult();
 
     return (
-      <div className="outputs">
-        <br />Total paid: {this.formatCurrency(results.totalPaid)}
-        <br />Principle paid: {this.formatCurrency(results.principlePaid)}, or: {this.formatPercent(results.principlePaidPercent)} of total payment
-        <br />Interest paid: {this.formatCurrency(results.interestPaid)}, or: {this.formatPercent(results.interestPaidPercent)} of total payment
-        <br />Remaining Principle: {this.formatCurrency(results.remainingPrinciple)}, or: {this.formatPercent(results.remainingPrinciplePercent)}
-        <br />
+      <div>
+        <h3>Results</h3>
+        <table className="outputs">
+          <tbody>
+            <tr><td>Total paid:</td><td>{this.formatCurrency(results.totalPaid)}</td></tr>
+            <tr><td>Principle paid:</td><td>{this.formatCurrency(results.principlePaid)}</td><td>or {this.formatPercent(results.principlePaidPercent)} of total payment</td></tr>
+            <tr><td>Interest paid:</td><td>{this.formatCurrency(results.interestPaid)}</td><td>or {this.formatPercent(results.interestPaidPercent)} of total payment</td></tr>
+            <tr><td>Remaining Principle:</td><td>{this.formatCurrency(results.remainingPrinciple)}</td><td>or {this.formatPercent(results.remainingPrinciplePercent)}</td></tr>
+          </tbody>
+        </table>
       </div>
     );
   }

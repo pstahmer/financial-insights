@@ -51,16 +51,20 @@ class Mortgage extends Group {
     const results = this.calculateResult();
 
     return (
-      <div className="outputs">
-        <br />Base payment: {this.formatCurrency(results.basePayment)}
-        <br />Payment increased by: {this.formatCurrency(results.additionalPrinciple)}, or: {this.formatPercent(results.additionalPrinciplePercent)}
-        <br />Interest reduced by: {this.formatCurrency(results.interestReducedBy)}, or: {this.formatPercent(results.interestReducedByPercent)}
-        <br />Term reduced by: {results.termReducedBy} months, or: {this.formatPercent(results.termReducedByPercent)}
-        <br />Total interest paid: {this.formatCurrency(results.totalInterest)}
-        <br />Total principle paid: {this.formatCurrency(results.totalPrinciple)}
-        <br />Total paid: {this.formatCurrency(results.total)}
-        <br />Number of payments: {results.paymentMonthCount}, over {results.paymentYearCount} years
-        <br />
+      <div>
+        <h3>Results</h3>
+        <table className="outputs">
+          <tbody>
+            <tr><td>Base payment: </td><td>{this.formatCurrency(results.basePayment)}</td></tr>
+            <tr><td>Payment increased by:</td><td> {this.formatCurrency(results.additionalPrinciple)}</td><td>or {this.formatPercent(results.additionalPrinciplePercent)}</td><td></td></tr>
+            <tr><td>Interest reduced by:</td><td> {this.formatCurrency(results.interestReducedBy)}</td><td>or {this.formatPercent(results.interestReducedByPercent)}</td></tr>
+            <tr><td>Term reduced by:</td><td> {results.termReducedBy} months</td><td>or {this.formatPercent(results.termReducedByPercent)}</td></tr>
+            <tr><td>Total interest paid:</td><td> {this.formatCurrency(results.totalInterest)}</td></tr>
+            <tr><td>Total principle paid:</td><td> {this.formatCurrency(results.totalPrinciple)}</td></tr>
+            <tr><td>Total paid: </td><td>{this.formatCurrency(results.total)}</td></tr>
+            <tr><td>Total Number of payments:</td><td> {results.paymentMonthCount} months</td><td colSpan="2">or {results.paymentYearCount} years</td></tr>
+          </tbody>
+        </table>
       </div>
     );
   }
