@@ -58,7 +58,7 @@ class Groups extends Component {
             <AddLoanCard key={i} text={n} click={this.addGroup.bind(null, n)} />)}
         </div>
         <div className="groups">
-          {this.state.groups.map(this.getGroup)}
+          {this.state.groups.reverse().map(this.getGroup)}
         </div>
       </div>
     );
