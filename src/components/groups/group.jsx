@@ -14,6 +14,9 @@ class Group extends Component {
   }
 
   formatCurrency(val) {
+    if (!val) {
+      return '$0.00';
+    }
     const value = val.toString();
     if (value.length <= 2) {
       return value;
@@ -34,6 +37,9 @@ class Group extends Component {
   }
 
   formatPercent(value) {
+    if (!value) {
+      return '0.00%'
+    }
     return `${value}%`;
   }
 
