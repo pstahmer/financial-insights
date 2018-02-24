@@ -1,5 +1,6 @@
 import React from 'react';
 
+import PaymentNumberLine from '../inputs/payment-number-line';
 import Group from './group';
 import { getValues } from '../../utils/additional-mortgage-calc';
 
@@ -36,6 +37,7 @@ class Mortgage extends Group {
   }
 
   calculateResult() {
+    console.log(this.refs);
     const { principle, interest, term, extra } = this.state
     if (principle && interest && term && extra) {
       return getValues(principle, interest / 12, term, extra);
@@ -65,6 +67,7 @@ class Mortgage extends Group {
             <tr><td>Total Number of payments:</td><td> {results.paymentMonthCount} months</td><td colSpan="2">or {results.paymentYearCount} years</td></tr>
           </tbody>
         </table>
+        <PaymentNumberLine ref="numberLine" max={results.paymentMonthCount} />
       </div>
     );
   }

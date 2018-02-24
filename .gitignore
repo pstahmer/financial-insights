@@ -17,8 +17,8 @@
 .env.production.local
 
 # compiled styles
-.css
 *.css
+!index.css
 
 npm-debug.log*
 yarn-debug.log*
