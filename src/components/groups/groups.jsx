@@ -3,12 +3,10 @@ import React, { Component } from 'react';
 import Mortgage from './mortgage';
 import Apr from './apr';
 import AddLoanCard from '../cards/add-loan-card';
+import { GROUP_NAMES } from '../../common/constants';
 import './groups.css';
 
-const GROUP_NAMES = {
-  MORTGAGE: 'mortgage',
-  APR: 'apr'
-};
+import { addLoan, deleteLoan, registerComponent, unregisterComponent } from '../../stores/loan-store';
 
 const GROUP_NAMES_ARRAY = [
   GROUP_NAMES.MORTGAGE,
@@ -18,32 +16,51 @@ const GROUP_NAMES_ARRAY = [
 class Groups extends Component {
   constructor(props) {
     super(props);
+    registerComponent(this);
 
     this.state = { groups: [] };
+    this.update = this.update.bind(this);
     this.addGroup = this.addGroup.bind(this);
     this.getGroup = this.getGroup.bind(this);
     this.removeGroup = this.removeGroup.bind(this);
   }
 
-  addGroup(name) {
-    this.setState({groups: this.state.groups.concat(name)});
+  componentWillUnmount() {
+    unregisterComponent(this);
   }
 
-  getGroup(groupName, i) {
-    switch (groupName) {
+  // when loan store updates, set our state
+  update(state) {
+    this.setState({ groups: state.loans })
+  }
+
+  addGroup(name) {
+    addLoan(name)
+  }
+
+  getGroup(group, i) {
+    switch (group.type) {
       case GROUP_NAMES.MORTGAGE:
-        return (<Mortgage key={i} onClose={this.removeGroup} />);
+        return (<Mortgage
+          key={group.id}
+          id={group.id}
+          onClose={this.removeGroup}
+          payments={group.additionalPayments}
+        />);
       case GROUP_NAMES.APR:
-        return (<Apr key={i} onClose={this.removeGroup} />);
+        return (<Apr
+          key={group.id}
+          id={group.id}
+          onClose={this.removeGroup}
+          payments={group.additionalPayments}
+        />);
       default:
         return null;
     }
   }
 
-  removeGroup(groupName) {
-    // TODO: If you have duplicates this will remove them.
-    // correct when extracting to reducer
-    this.setState({groups: this.state.groups.filter(g => g !== groupName)});
+  removeGroup(id) {
+    deleteLoan(id);
   }
 
   renderOption(n, i) {

@@ -37,16 +37,11 @@ class Mortgage extends Group {
   }
 
   calculateResult() {
-    console.log(this.refs);
     const { principle, interest, term, extra } = this.state
     if (principle && interest && term && extra) {
       return getValues(principle, interest / 12, term, extra);
     }
     return {};
-  }
-
-  closeGroup() {
-    this.props.onClose('mortgage');
   }
 
   renderResults() {

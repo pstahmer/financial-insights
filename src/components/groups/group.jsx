@@ -58,6 +58,10 @@ class Group extends Component {
     );
   }
 
+  closeGroup() {
+    this.props.onClose(this.props.id);
+  }
+
   render() {
     const closeGroup = this.closeGroup.bind(this);
 

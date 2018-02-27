@@ -50,10 +50,6 @@ class Apr extends Group {
     return {};
   }
 
-  closeGroup() {
-    this.props.onClose('apr');
-  }
-
   renderResults() {
     const results = this.calculateResult();
 
