@@ -13,6 +13,10 @@ class Group extends Component {
     });
   }
 
+  closeGroup() {
+    this.props.onClose(this.props.id);
+  }
+
   formatCurrency(val) {
     if (!val) {
       return '$0.00';
@@ -58,8 +62,19 @@ class Group extends Component {
     );
   }
 
-  closeGroup() {
-    this.props.onClose(this.props.id);
+  renderPayment(p, i) {
+    return (
+      <div key={i}>month: {p.paymentNumber}, lump sum: {p.amount}</div>
+    );
+  }
+
+  renderAdditionalPayments() {
+    const payments = this.props.payments || [];
+    return (
+      <div>
+        {payments.map(this.renderPayment)}
+      </div>
+    );
   }
 
   render() {
@@ -69,6 +84,7 @@ class Group extends Component {
       <div className="group">
         <span className="close" onClick={closeGroup}>X</span>
         {this.renderFields()}
+        {this.renderAdditionalPayments()}
         {this.renderResults()}
       </div>
     );

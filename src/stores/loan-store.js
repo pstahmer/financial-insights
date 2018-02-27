@@ -22,6 +22,7 @@ const unregisterComponent = (component) => {
   }
 */
 let i = 0;
+let j = 0;
 const state = {
   loans: []
 };
@@ -44,11 +45,17 @@ const deleteLoan = (id) => {
 }
 
 const addPaymentToLoan = (payment, loanId) => {
+  const loan = state.loans.find(l => l.id === loanId);
+  loan.additionalPayments.push({ id: ++j, ...payment });
+  updateComponents();
+}
 
+const removePaymentFromLoan = (paymentId, loanId) => {
+//   state.loans.find(l => l.id === loanId).;
   updateComponents();
 }
 
 export {
-  addLoan, deleteLoan, addPaymentToLoan,
+  addLoan, deleteLoan, addPaymentToLoan, removePaymentFromLoan,
   registerComponent, unregisterComponent, updateComponents
 };

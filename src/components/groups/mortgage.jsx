@@ -37,9 +37,10 @@ class Mortgage extends Group {
   }
 
   calculateResult() {
-    const { principle, interest, term, extra } = this.state
-    if (principle && interest && term && extra) {
-      return getValues(principle, interest / 12, term, extra);
+    const { principle, interest, term, extra } = this.state;
+    const { payments } = this.props;
+    if (principle && interest && term) {
+      return getValues(principle, interest / 12, term, extra, payments);
     }
     return {};
   }
@@ -62,7 +63,7 @@ class Mortgage extends Group {
             <tr><td>Total Number of payments:</td><td> {results.paymentMonthCount} months</td><td colSpan="2">or {results.paymentYearCount} years</td></tr>
           </tbody>
         </table>
-        <PaymentNumberLine ref="numberLine" max={results.paymentMonthCount} />
+        <PaymentNumberLine id={this.props.id} max={results.paymentMonthCount} />
       </div>
     );
   }

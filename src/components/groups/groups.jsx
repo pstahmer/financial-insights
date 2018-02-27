@@ -31,7 +31,7 @@ class Groups extends Component {
 
   // when loan store updates, set our state
   update(state) {
-    this.setState({ groups: state.loans })
+    this.setState({ groups: state.loans.sort(l => l.id) })
   }
 
   addGroup(name) {

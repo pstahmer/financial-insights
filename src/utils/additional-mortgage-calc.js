@@ -9,15 +9,23 @@ const calculateBasePayment = (principle, monthlyRate, term) => {
   return basePayment;
 };
 
-const calculatePayments = (principle, monthlyRate, term, additionalPrinciple) => {
+const calculatePayments = (principle, monthlyRate, term, additionalPrinciple, additionalPayments) => {
   let payments = [];
   let currentPrinciple = principle;
   const basePayment = calculateBasePayment(principle, monthlyRate, term);
 
   for (let year = 0; year < 30 && currentPrinciple > 0; year++) {
     for (let month = 0; month < 12 && currentPrinciple > 0; month++) {
+      if (currentPrinciple < 0) {
+        break;
+      }
       let currentInterestPayment = round(monthlyRate * currentPrinciple);
       let currentPrinciplePayment = round(basePayment - currentInterestPayment + additionalPrinciple || 0);
+
+      const overallMonth = year * 12 + month;
+      let additionalPayment = additionalPayments && additionalPayments.find(p => p.paymentNumber === overallMonth)
+
+      currentPrinciplePayment += additionalPayment ? additionalPayment.amount : 0;
       currentPrinciple -= currentPrinciplePayment;
 
       payments.push({
@@ -30,8 +38,8 @@ const calculatePayments = (principle, monthlyRate, term, additionalPrinciple) =>
   return payments;
 };
 
-export const getValues = (principle, monthlyRate, term, additionalPrinciple) => {
-  let payments = calculatePayments(principle, monthlyRate, term, additionalPrinciple);
+export const getValues = (principle, monthlyRate, term, additionalPrinciple, additionalPayments) => {
+  let payments = calculatePayments(principle, monthlyRate, term, additionalPrinciple, additionalPayments);
   let totalPrinciple = 0;
   let totalInterest = 0;
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './payment-number-line.css';
+import { addPaymentToLoan } from '../../stores/loan-store';
 
 class PaymentNumberLine extends Component {
   constructor(props) {
@@ -29,13 +30,13 @@ class PaymentNumberLine extends Component {
 
   addPayment() {
     const { additionalPayments, inputValue, lineValue } = this.state;
-    // TODO: this should probably go in the store
-    this.setState({
-      additionalPayments: additionalPayments.concat({
-        paymentNumber: lineValue,
-        amount: inputValue
-      })
-    });
+    addPaymentToLoan(
+      {
+        paymentNumber: parseInt(lineValue),
+        amount: parseInt(inputValue, 10)
+      },
+      this.props.id
+    );
   }
 
   render() {
