@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 
+import { removePaymentFromLoan } from '../../stores/loan-store';
+
 // base class for the other groups to inherit
 class Group extends Component {
   fields = [];
+
+  constructor(props) {
+    super(props);
+
+    this.renderPayment = this.renderPayment.bind(this);
+  }
 
   addField(title, stateProp, onChange, step) {
     this.fields.push({
@@ -62,9 +70,17 @@ class Group extends Component {
     );
   }
 
+  // TODO: move all this additional payment stuff to own component
+  removePayment(paymentId, loanId) {
+    removePaymentFromLoan(paymentId, loanId);
+  }
+
   renderPayment(p, i) {
     return (
-      <div key={i}>month: {p.paymentNumber}, lump sum: {p.amount}</div>
+      <div key={i}>
+        <button onClick={this.removePayment.bind(null, p.id, this.props.id)}>Remove lump payment</button>
+        <div>month: {p.paymentNumber}, lump sum: {p.amount}</div>
+      </div>
     );
   }
 
@@ -72,6 +88,7 @@ class Group extends Component {
     const payments = this.props.payments || [];
     return (
       <div>
+        <h3>Lump Payments</h3>
         {payments.map(this.renderPayment)}
       </div>
     );

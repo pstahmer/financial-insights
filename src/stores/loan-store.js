@@ -59,7 +59,8 @@ const addPaymentToLoan = (payment, loanId) => {
 
 const removePaymentFromLoan = (paymentId, loanId) => {
   const loan = state.loans.find(l => l.id === loanId);
-  loan.additionalPayments.slice(loan.additionalPayments.findIndex(p => p.id === paymentId), 1);
+  const paymentIndex = loan.additionalPayments.findIndex(p => p.id === paymentId)
+  loan.additionalPayments.splice(paymentIndex, paymentIndex + 1);
   updateComponents();
 }
 
