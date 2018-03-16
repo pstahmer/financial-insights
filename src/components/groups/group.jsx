@@ -77,21 +77,21 @@ class Group extends Component {
 
   renderPayment(p, i) {
     return (
-      <div key={i}>
-        <button onClick={this.removePayment.bind(null, p.id, this.props.id)}>Remove lump payment</button>
-        <div>month: {p.paymentNumber}, lump sum: {p.amount}</div>
+      <div key={i} className="additionalPayment">
+        <button onClick={this.removePayment.bind(null, p.id, this.props.id)}>Remove</button>
+        <span>month: {p.paymentNumber}, lump sum: {p.amount}</span>
       </div>
     );
   }
 
   renderAdditionalPayments() {
     const payments = this.props.payments || [];
-    return (
+    return payments.length ? (
       <div>
         <h3>Lump Payments</h3>
         {payments.map(this.renderPayment)}
       </div>
-    );
+    ) : <span></span>;
   }
 
   render() {
