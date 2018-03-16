@@ -29,10 +29,10 @@ class PaymentNumberLine extends Component {
   }
 
   addPayment() {
-    const { additionalPayments, inputValue, lineValue } = this.state;
+    const { inputValue, lineValue } = this.state; // don't need additionalPayments right now
     addPaymentToLoan(
       {
-        paymentNumber: parseInt(lineValue),
+        paymentNumber: parseInt(lineValue, 10),
         amount: parseInt(inputValue, 10)
       },
       this.props.id

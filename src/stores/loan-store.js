@@ -1,4 +1,4 @@
-import { GROUP_NAMES } from '../common/constants';
+// import { GROUP_NAMES } from '../common/constants';
 
 // GENERIC STORE LOGIC
 // todo: extract these to a store generator, have generator import all stores,
@@ -46,12 +46,20 @@ const deleteLoan = (id) => {
 
 const addPaymentToLoan = (payment, loanId) => {
   const loan = state.loans.find(l => l.id === loanId);
-  loan.additionalPayments.push({ id: ++j, ...payment });
+  // if no payment exists at this increment, add it. Otherwise, replace existing
+  const existingPayment = loan.additionalPayments.find(p => p.paymentNumber === payment.paymentNumber);
+  if (existingPayment) {
+    existingPayment.amount = payment.amount;
+  } else {
+    loan.additionalPayments.push({ id: ++j, ...payment });
+  }
+
   updateComponents();
 }
 
 const removePaymentFromLoan = (paymentId, loanId) => {
-//   state.loans.find(l => l.id === loanId).;
+  const loan = state.loans.find(l => l.id === loanId);
+  loan.additionalPayments.slice(loan.additionalPayments.findIndex(p => p.id === paymentId), 1);
   updateComponents();
 }
 
